@@ -1,18 +1,33 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <div class="question">{{steps[slide].text}}</div>
+    <div class="buttons">
+      <button @click="nextTrue()" v-if="steps[slide].trueButton">{{steps[slide].trueButton}}</button>
+      <button @click="nextFalse()" v-if="steps[slide].falseButton">{{steps[slide].falseButton}}</button>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
-
+import Steps from "./components/slides";
 export default {
   name: "app",
-  components: {
-    HelloWorld
-  }
+  components: {},
+  data() {
+    return {
+      slide: 0,
+      steps: Steps
+    };
+  },
+  methods: {
+    nextTrue() {
+      this.slide = this.steps[this.slide].trueNext;
+    },
+    nextFalse() {
+      this.slide = this.steps[this.slide].falseNext;
+    }
+  },
+  mounted() {}
 };
 </script>
 
